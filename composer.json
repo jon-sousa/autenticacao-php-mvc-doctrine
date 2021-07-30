@@ -1,0 +1,26 @@
+{
+    "name": "jon/autenticacao",
+    "description": "A simple application for user authentication in PHP",
+    "type": "project",
+    "require": {
+        "psr/http-message": "^1.0",
+        "psr/http-server-handler": "^1.0",
+        "nyholm/psr7": "^1.4",
+        "doctrine/orm": "^2.9",
+        "doctrine/migrations": "^3.2",
+        "doctrine/cache": "^2.1",
+        "symfony/cache": "^5.3",
+        "nyholm/psr7-server": "^1.0"
+    },
+    "authors": [
+        {
+            "name": "jon-sousa",
+            "email": "jonassleandro1@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "jon\\autenticacao\\": "src/"
+        }
+    }
+}
