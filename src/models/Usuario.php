@@ -87,11 +87,12 @@ class Usuario
         return $this->senha;
     }
 
+    public function cadastrarSenha(string $senha){
+        $senhaHash = password_hash($senha, PASSWORD_ARGON2I);
+        $this->senha = $senhaHash;
+    }
 
-    public function setSenha($senha)
-    {
-        $this->senha = $senha;
-
-        return $this;
+    public function verificarSenha(string $senha){
+        return password_verify($senha, $this->senha);
     }
 }

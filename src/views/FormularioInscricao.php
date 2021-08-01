@@ -4,7 +4,7 @@ namespace jon\autenticacao\views;
 
 ?>
 
-<form action="" method="post">
+<form action="/criar-usuario" method="post">
     <label for="">Nome Completo</label>
     <input type="text" name="nomeCompleto" id="">
     <label for="">Data de Nascimento</label>
@@ -14,4 +14,5 @@ namespace jon\autenticacao\views;
     <label for="">Login</label>
     <input type="text" name="login" id="">
     <label for="">Senha</label><input type="password" name="senha" id="">
+    <input type="submit" value="Inscrever">
 </form>

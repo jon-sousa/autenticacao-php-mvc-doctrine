@@ -27,7 +27,6 @@ $request = $creator->fromGlobals();
 
 $controllerClass = $router[$path];
 $controller = new $controllerClass();
-// $controller = new FormularioInscricaoController();
 
 $response = $controller->handle($request);
 
