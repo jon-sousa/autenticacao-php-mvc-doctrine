@@ -3,6 +3,7 @@
 namespace jon\autenticacao\models;
 
 use Doctrine\ORM\Mapping as ORM;
+use jon\autenticacao\errors\InvalidPasswordException;
 
 /**
  * @ORM\Entity
@@ -88,6 +89,15 @@ class Usuario
     }
 
     public function cadastrarSenha(string $senha){
+
+        if(!preg_match('/[a-zA-z]+\d+/', $senha)){
+            throw new InvalidPasswordException('Senha deve conter letras e numeros');
+        }
+        
+        if(!preg_match('/.{6,}/', $senha)){
+            throw new InvalidPasswordException('Senha deve conter, ao menos, 6 dígitos');
+        }
+
         $senhaHash = password_hash($senha, PASSWORD_ARGON2I);
         $this->senha = $senhaHash;
     }

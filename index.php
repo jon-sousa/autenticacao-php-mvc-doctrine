@@ -1,6 +1,13 @@
 <?php
 
-use jon\autenticacao\controllers\FormularioInscricaoController;
+session_start();
+
+use jon\autenticacao\controllers\{
+    FormularioInscricaoController,
+    FormularioLoginController,
+    CriarUsuarioController,
+    RealizarLoginController
+};
 use Nyholm\Psr7\Factory\Psr17Factory;
 use Nyholm\Psr7Server\ServerRequestCreator;
 
@@ -27,7 +34,6 @@ $request = $creator->fromGlobals();
 
 $controllerClass = $router[$path];
 $controller = new $controllerClass();
-
 $response = $controller->handle($request);
 
 foreach ($response->getHeaders() as $name => $values) {
