@@ -90,7 +90,7 @@ class Usuario
 
     public function cadastrarSenha(string $senha){
 
-        if(!preg_match('/[a-zA-z]+\d+/', $senha)){
+        if(!preg_match('/[a-zA-z]+.*\d+/', $senha) && !preg_match('/\d+.*[a-zA-z]+/', $senha)){
             throw new InvalidPasswordException('Senha deve conter letras e numeros');
         }
         

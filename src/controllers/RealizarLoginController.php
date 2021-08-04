@@ -27,24 +27,17 @@ class RealizarLoginController implements RequestHandlerInterface
                         findOneBy(['email'=> $email]);
 
         if($usuario == null){
-            $html = $this->renderView('FormularioLogin', 
-                [
-                    'flashMessage' => 'Usuário não encontrado',
-                    'flashMessageClass' => "alert alert-danger"
-                ]
-            );
+            $_SESSION['flashMessage'] = 'Usuário não encontrado';
+            $_SESSION['flashMessageClass'] =  'alert alert-danger text-center';
 
-            return new Response(204, [], $html);
+            return new Response(500, ['location' => '/login']);
         }
         
         if(!$usuario->verificarSenha($senha)){
-            $html = $this->renderView('FormularioLogin', 
-                [
-                    'flashMessage' => 'Senha incorreta',
-                    'flashMessageClass' => "alert alert-danger"
-                ]
-            );
-            return new Response(204, [], $html);
+            $_SESSION['flashMessage'] = 'Senha incorreta';
+            $_SESSION['flashMessageClass'] =  'alert alert-danger text-center';
+    
+            return new Response(500, ['location' => '/login']);
         }
 
         $_SESSION['usuario'] = $usuario->getNomeCompleto();

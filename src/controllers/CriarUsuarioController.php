@@ -28,11 +28,11 @@ class CriarUsuarioController implements RequestHandlerInterface
             $emailDB = ($this->entityManager->getRepository('jon\autenticacao\models\Usuario'))->
                             findOneBy(['email' => $usuarioBody['email']]);
 
-            if($emailDB == null){
+            if($emailDB != null){
                 $html = $this->renderView('FormularioInscricao',
                     [
                         'flashMessage' => 'E-mail já utilizado',
-                        'flashMessageClass' => 'alert alert-danger'
+                        'flashMessageClass' => 'alert alert-danger text-center'
                     ]
                 );
                 return new Response(204, [], $html);
@@ -51,32 +51,11 @@ class CriarUsuarioController implements RequestHandlerInterface
 
             return new Response(200, ['location' => '/login']);
         }
-        catch(InvalidPasswordException){
-            $html = $this->renderView('FormularioInscricao', 
-                [
-                    'flashMessage' => 'Senha inválida! A senha deve conter letras e números e ter, pelo menos 6 dígitos',
-                    'flashMessageClass' => 'alert alert-danger'
-                ]
-            );
-            return new Response(204, [], $html);
-        }
         catch(\Error|\Exception $e){
-            $html = $this->renderView('FormularioInscricao', 
-                [
-                    'flashMessage' => 'Senha inválida! A senha deve conter letras e números e ter, pelo menos 6 dígitos',
-                    'flashMessageClass' => 'alert alert-danger'
-                ]
-            );
-            return new Response(500, [], $html);
-        }
-        catch(\Throwable $e){
-            $html = $this->renderView('FormularioInscricao', 
-                [
-                    'flashMessage' => 'Senha inválida! A senha deve conter letras e números e ter, pelo menos 6 dígitos',
-                    'flashMessageClass' => 'alert alert-danger'
-                ]
-            );
-            return new Response(500, [], $html);
+            $_SESSION['flashMessage'] = $e->getMessage();
+            $_SESSION['flashMessageClass'] =  'alert alert-danger text-center';
+
+            return new Response(500, ['location' => '/inscricao']);
         }
     }
 }

@@ -1,3 +1,9 @@
+<?php 
+    if(!isset($title)){
+        $title = 'Autenticação';
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -9,9 +15,15 @@
     </head>
     <body>
         <?php
-            if(!(isset($flashMessage) || isset($flashMessage))){
-                $flashMessage = '';
-                $flashMessageClass = '';
+            if(!(isset($flashMessage) || isset($flashMessageClass))){
+                if(!(isset($_SESSION['flashMessage']) || isset($_SESSION['flashMessageClass']))){
+                    $flashMessage = '';
+                    $flashMessageClass = '';
+                }
+                else {
+                    $flashMessage = $_SESSION['flashMessage'];
+                    $flashMessageClass = $_SESSION['flashMessageClass'];
+                }
             } 
         ?>
         <div class= "<?= $flashMessageClass ?>"  > <?= $flashMessage?> </div> 

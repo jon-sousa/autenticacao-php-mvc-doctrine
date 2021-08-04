@@ -21,6 +21,12 @@ if(!array_key_exists($path, $router)){
     return;
 }
 
+if($path == '/' && !isset($_SESSION['usuario'])){
+    http_response_code(204);
+    header('Location: /login');
+    return;
+}
+
 $psr17Factory = new Psr17Factory();
 
 $creator = new ServerRequestCreator(

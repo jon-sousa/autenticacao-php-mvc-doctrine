@@ -13,7 +13,7 @@ class FormularioLoginController implements RequestHandlerInterface
     use RenderViewTrait;
 
     public function handle(ServerRequestInterface $request) : ResponseInterface{
-        $html = $this->renderView('FormularioLogin', ['title => login']);
+        $html = $this->renderView('FormularioLogin', ['title' => 'login']);
 
         return new Response(200, [], $html);
     }
